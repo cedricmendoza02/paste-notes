@@ -10,15 +10,22 @@ function App(props) {
   function handleChange(e) {
     let field = e.target.tagName; // get the target tagname
     // If it's not a textarea, then it's the input field for title
+    document.querySelectorAll(".note-item")
+      .forEach(item => {
+        item.classList.remove("active")
+      })
     field === "TEXTAREA" ?
       setContent(e.target.value) :
       setTitle(e.target.value);
   }
 
-  function handleItemClick(obj, e) {
-    // the event target returned here is an li
-    setTitle(obj.title);
-    setContent(obj.content);
+  function handleItemClick(title, e) {
+    list.forEach(elem => {
+      if(elem.title === title) {
+        setTitle(elem.title);
+        setContent(elem.content);
+      }
+    })
   }
 
   function handleSave(e) {
@@ -68,7 +75,6 @@ function App(props) {
     if(itemIndex > -1) {
       curList.splice(itemIndex, 1)
       updateList(curList);
-      console.log("item removed");
       clearFields();
     }
   }
