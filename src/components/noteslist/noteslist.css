@@ -1,11 +1,15 @@
-.note-item:hover {
+/* .note-item:hover {
   background-color: rgb(106, 184, 248);
   color: black;
   cursor: pointer;
-}
+} */
 
 .note-item {
   display: block;
   padding: 5px 20px;
   font-size: 1.5rem;
+}
+
+.active {
+  background-color: rgb(106, 184, 248);
 }

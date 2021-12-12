@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './noteslist.css';
 
-function NoteItem({title, content, onClick}) {
-  const [status, setStatus] = useState(false);
+function NoteItem({title}) {
 
-  function handleClick() {
-    setStatus(!status);
-    onClick();
-  }
   return (
     <li 
-      className="note-item" 
-      style={status ? {backgroundColor: "red", color: "white"}
-      : {}}
-      onClick={handleClick}>{title}</li>
+      className="note-item">{title}</li>
   )
 }
 
 function NotesList({list, onClick}) {
+  
+    function handleClick(e) {
+      document.querySelectorAll(".note-item")
+      .forEach(item => {
+        item.classList.remove("active")
+      })
+      e.target.classList.add("active");
+      let title = e.target.innerHTML;
+      onClick(title);
+    }
+
     return (
-      <ul className="notes-list-wrapper">
+      <ul 
+        onClick={handleClick}
+        className="notes-list-wrapper">
         {list.map(item => (
           <NoteItem 
             key={item.title} 
             title={item.title} 
-            content={item.content}
-            onClick={(e) => onClick(item, e)} />
+            content={item.content} />
         ))}
       </ul>
     )
