@@ -1,38 +1,22 @@
 import React from 'react';
 import './noteslist.css';
 
-function NoteItem({title}) {
+function NotesList({list, onClick}) {
+
+  const handleClick = (e) => {
+    let title = e.target.textContent;
+    onClick(title);
+  }
 
   return (
-    <li 
-      className="note-item">{title}</li>
+    <div>
+      <ul onClick={handleClick}>
+        {list.map(({title},i) => <li key={i}>{title}</li>)}
+      </ul>
+      <button>Move up</button>
+      <button>Move down</button>
+    </div>
   )
 }
-
-function NotesList({list, onClick}) {
-  
-    function handleClick(e) {
-      document.querySelectorAll(".note-item")
-      .forEach(item => {
-        item.classList.remove("active")
-      })
-      e.target.classList.add("active");
-      let title = e.target.innerHTML;
-      onClick(title);
-    }
-
-    return (
-      <ul 
-        onClick={handleClick}
-        className="notes-list-wrapper">
-        {list.map(item => (
-          <NoteItem 
-            key={item.title} 
-            title={item.title} 
-            content={item.content} />
-        ))}
-      </ul>
-    )
-  }
 
 export default NotesList;

@@ -1,13 +1,13 @@
 import React from 'react'
 import './button.css'
 
-function Button(props) { 
-    return props.value === "Save" ?
+function Button({value, onClick}) { 
+    return value === "Save" ?
       (
-        <button onClick={props.onClick}>Save</button>
+        <button onClick={onClick}>Save</button>
       ) :
       (
-        <button onClick={props.onClick}>Delete</button>
+        <button onClick={onClick}>Delete</button>
       )
   }
 

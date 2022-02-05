@@ -5,7 +5,7 @@ import './App.css';
 function App(props) {
   let [title, setTitle] = useState("");
   let [content, setContent] = useState("");
-  let [list, updateList] = useState([]);
+  let [list, setList] = useState([]);
 
   function handleChange(e) {
     let field = e.target.tagName; // get the target tagname
@@ -18,7 +18,6 @@ function App(props) {
       setContent(e.target.value) :
       setTitle(e.target.value);
   }
-
   function handleItemClick(title, e) {
     list.forEach(elem => {
       if(elem.title === title) {
@@ -27,38 +26,30 @@ function App(props) {
       }
     })
   }
-
   function handleSave(e) {
     e.preventDefault();
-    const curList = list.slice(); // declare a local copy of list
+    // declare a local copy of list
+    const curList = list.slice(); 
+
     // Check if list already contains the title set
     let itemIndex = -1;
-    list.some((elem, i) => {
+    curList.some((elem, i) => {
       if(elem.title === title) {
         itemIndex = i;
         return true;
       }
       return false;
     })
-
     if(itemIndex > -1) {
       curList[itemIndex] = {title, content};
-      updateList(curList);
+      setList(curList);
       clearFields();
       return;
     }
-    
-    /* Following functional programming principles,
-    declare a copy of the array without modifying the original array
-    if the original array is modified directly, it won't trigger re-render of the component
-    */
-    curList.push({title, content}); // add the new item to the end of the list
-    updateList(curList); // use the updateList method to update the state
-
-    // empty the fields
+    curList.push({title, content});
+    setList(curList);
     clearFields();
   }
-
   function handleDelete(e) {
     e.preventDefault();
     if(title === "") return;
@@ -74,16 +65,14 @@ function App(props) {
 
     if(itemIndex > -1) {
       curList.splice(itemIndex, 1)
-      updateList(curList);
+      setList(curList);
       clearFields();
     }
-  }
-  
+  } 
   function clearFields() {
     setTitle("")
     setContent("")
   }
-
   return (
     <div className="app-wrapper">
       <div className="app-wrapper-noteslist">
