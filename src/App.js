@@ -6,7 +6,7 @@ function App(props) {
   let [title, setTitle] = useState("");
   let [content, setContent] = useState("");
   let [list, updateList] = useState([]);
-  
+
   function handleChange(e) {
     let field = e.target.tagName; // get the target tagname
     // If it's not a textarea, then it's the input field for title
