@@ -73,6 +73,26 @@ function App(props) {
     setTitle("")
     setContent("")
   }
+  function moveUp() {
+    let localList = list.slice();
+    let titleList = localList.map(note => note.title)
+    let targetIndex = titleList.findIndex(elem => elem === title);
+    if(!targetIndex) return;
+    let temp = localList[targetIndex - 1];
+    localList[targetIndex - 1] = localList[targetIndex]
+    localList[targetIndex] = temp;
+    setList(localList);
+  }
+  function moveDown() {
+    let localList = list.slice();
+    let titleList = localList.map(note => note.title)
+    let targetIndex = titleList.findIndex(elem => elem === title);
+    if(targetIndex == list.length - 1) return;
+    let temp = localList[targetIndex + 1];
+    localList[targetIndex + 1] = localList[targetIndex]
+    localList[targetIndex] = temp;
+    setList(localList);
+  }
   return (
     <div className="app-wrapper">
       <div className="app-wrapper-noteslist">
@@ -80,6 +100,8 @@ function App(props) {
         <NotesList 
           list={list}
           onClick={handleItemClick}
+          moveUp={moveUp}
+          moveDown={moveDown}
           />
       </div>
       <form>

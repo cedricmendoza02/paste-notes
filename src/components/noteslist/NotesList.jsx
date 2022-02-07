@@ -1,7 +1,7 @@
 import React from 'react';
 import './noteslist.css';
 
-function NotesList({list, onClick}) {
+function NotesList({list, onClick, moveUp, moveDown}) {
 
   const handleClick = (e) => {
     let title = e.target.textContent;
@@ -13,8 +13,8 @@ function NotesList({list, onClick}) {
       <ul onClick={handleClick}>
         {list.map(({title},i) => <li key={i}>{title}</li>)}
       </ul>
-      <button>Move up</button>
-      <button>Move down</button>
+      <button onClick={moveUp}>Move up</button>
+      <button onClick={moveDown}>Move down</button>
     </div>
   )
 }
